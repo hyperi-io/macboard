@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
 # macboard installer — make a Mac keyboard behave like a Windows/Linux keyboard.
-# Idempotent: safe to re-run. Backs up your live Karabiner config before changing it.
+# Idempotent: safe to re-run — each step changes only what's needed, and a file is backed
+# up only when it's actually modified (no pile-up of backups on repeat runs).
 #
 set -euo pipefail
 
@@ -45,14 +46,12 @@ else
   warn "karabiner_cli not found; skipping lint."
 fi
 
-# 3. Back up the live config.
+# 3. Ensure the live config exists. merge_profile.py backs it up (timestamped) ONLY when
+#    it actually changes something, so re-running with nothing to do writes nothing.
 if [ ! -f "${KARABINER_JSON}" ]; then
   echo "No ${KARABINER_JSON} found — launch Karabiner-Elements once, then re-run." >&2
   exit 1
 fi
-BACKUP="${KARABINER_JSON}.macboard-backup-$(date +%Y%m%d-%H%M%S)"
-cp "${KARABINER_JSON}" "${BACKUP}"
-say "Backed up live config -> ${BACKUP}"
 
 # 4. Apply macboard (Globe=Control simple-mod + full ruleset).
 if [ -n "${CLEAN_FLAG}" ]; then
@@ -86,6 +85,12 @@ subprocess.run(["defaults", "import", dom, "-"], input=plistlib.dumps(data))
 PY
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
 
+# 7. Add Windows/Linux-style Ctrl keybindings to VS Code / Cursor (additive; your Cmd
+#    shortcuts and any bindings you set yourself are preserved; the integrated terminal
+#    stays raw). No-op if neither editor is installed.
+say "Adding Ctrl keybindings to VS Code / Cursor (if installed)…"
+python3 "${REPO_DIR}/scripts/vscode_keybindings.py" || true
+
 cat <<EOF
 
 $(say "macboard installed.")
@@ -94,8 +99,9 @@ $(say "macboard installed.")
   • Top row = F1–F12;  Right-Option + F1…F12 = brightness / Mission Control / volume / media.
   • PrintScreen = Cmd+Shift+5;  Finder Delete = move to Trash.
   • Ctrl+←/→ freed from Spaces-switching → word-jump in terminals (via your shell bindings).
+  • VS Code / Cursor: Windows-style Ctrl shortcuts added (Cmd still works; terminal stays raw).
 
-  Backup: ${BACKUP}
+  Backups are timestamped in ~/.config/karabiner/ (written only when something changed).
   Revert: ./uninstall.sh
 
   >> LOG OUT AND BACK IN (or restart) to finish <<

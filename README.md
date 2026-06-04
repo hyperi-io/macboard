@@ -16,7 +16,7 @@ mental context-shift *every single time* — the one forced purely by the junk d
 modifier conventions. Windows and Linux put **Ctrl** in the bottom-left corner and use it
 for copy / paste / save / select-all / interrupt; macOS uses **Command** for all of those
 and parks Control somewhere your fingers never expect. So every keyboard switch costs you a
-tax: "wait, is this the Mac one?" macboard deletes that tax. The Mac's bottom-left key
+tax: "wait, is this the Mac one?" macboard deletes that tax. The Mac's bottom-left (world) key
 becomes your Ctrl and the Windows-style shortcuts just work, so you stop thinking about the
 keyboard and get back to work.
 
@@ -45,6 +45,7 @@ Apple Silicon MacBook (tested on an M-series Air), recent macOS. **macOS only.**
 | **PrintScreen** | Opens the macOS screenshot toolbar (`Cmd+Shift+5`). |
 | **Windows Delete key** | Forward-deletes in text (native); in **Finder**, `Delete` = move to Trash, `Shift+Delete` = delete immediately. On the built-in keyboard, `Right-Option+Backspace` = forward delete. |
 | **Windows nav keys** | `Home`/`End`, `Ctrl+←/→` (word jump), `Ctrl+Backspace/Delete` (word delete), `Alt+F4` (quit), etc. — from windows-mode. |
+| **VS Code / Cursor** | IDEs are exempt from the OS matrix, so Windows-style **Ctrl shortcuts are added to your editor's `keybindings.json`** instead — additive (Cmd still works, your own bindings win, the integrated terminal stays raw). |
 
 ### Why a "matrix" and not just a key swap?
 
@@ -74,6 +75,12 @@ The installer is idempotent and:
 5. Sets the top row to standard F1–F12 (`fnState`).
 6. Disables the macOS **"Move left/right a space"** shortcut so `Ctrl+←/→` reaches the
    terminal (word-jump) instead of switching Spaces.
+7. Adds Windows-style **Ctrl keybindings to VS Code / Cursor** (`keybindings.json`) —
+   additive: your Cmd shortcuts and your own bindings are kept, the integrated terminal
+   stays raw. Skipped if neither is installed.
+
+It's **idempotent**: every step changes only what's actually out of date, and a file is
+backed up only when it's modified — so repeat runs are no-ops, not a pile of backups.
 
 Grant Karabiner **Input Monitoring** / **Accessibility** permission if prompted.
 

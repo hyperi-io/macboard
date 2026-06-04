@@ -20,8 +20,11 @@ Default (merge) mode — touches only the *selected* profile:
 Either way it writes atomically (temp file + os.replace). The installer takes a
 timestamped backup before this runs.
 """
+import copy
+import datetime
 import json
 import os
+import shutil
 import sys
 
 
@@ -52,6 +55,7 @@ def main():
     with open(macboard_path) as f:
         macboard = json.load(f)
 
+    before = copy.deepcopy(config)
     profiles = config.get("profiles", [])
     if not profiles:
         sys.exit("error: no profiles found in karabiner.json")
@@ -96,12 +100,21 @@ def main():
             f"  complex rules  : replaced with {len(rules)} macboard rules"
         )
 
+    if config == before:
+        print("  no change — Karabiner config already current")
+        return
+
+    ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    backup = f"{karabiner_path}.macboard-backup-{ts}"
+    shutil.copy2(karabiner_path, backup)
+
     tmp = karabiner_path + ".macboard-tmp"
     with open(tmp, "w") as f:
         json.dump(config, f, indent=4, ensure_ascii=False)
         f.write("\n")
     os.replace(tmp, karabiner_path)
     print(summary)
+    print(f"  backup -> {backup}")
 
 
 if __name__ == "__main__":
