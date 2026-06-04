@@ -11,7 +11,7 @@ memory; every other feature is in service of it.
 
 ## Who this is for
 
-Developers who **routinely swap between macOS, Linux, and Windows** and are sick of the
+Developers and infra people who **routinely swap between macOS, Linux, and Windows** and are sick of the
 mental context-shift *every single time* — the one forced purely by the junk difference in
 modifier conventions. Windows and Linux put **Ctrl** in the bottom-left corner and use it
 for copy / paste / save / select-all / interrupt; macOS uses **Command** for all of those
@@ -20,7 +20,7 @@ tax: "wait, is this the Mac one?" macboard deletes that tax. The Mac's bottom-le
 becomes your Ctrl and the Windows-style shortcuts just work, so you stop thinking about the
 keyboard and get back to work.
 
-**Especially when docked.** The headline scenario: a MacBook on a docking station driving
+**Especially when docked.** The scenario: a MacBook on a docking station driving
 an external monitor with a full-size **Windows/PC keyboard** plugged in. That external
 keyboard sends a *real* Ctrl — which macOS normally ignores for copy/paste — so macboard's
 `Ctrl→Cmd` translation is exactly what makes `Ctrl+C` actually copy on it. The rules apply
@@ -72,9 +72,20 @@ The installer is idempotent and:
    with a single pristine macboard profile (other profiles / per-device settings dropped;
    Karabiner re-detects devices automatically).
 5. Sets the top row to standard F1–F12 (`fnState`).
+6. Disables the macOS **"Move left/right a space"** shortcut so `Ctrl+←/→` reaches the
+   terminal (word-jump) instead of switching Spaces.
 
-Grant Karabiner **Input Monitoring** / **Accessibility** permission if prompted. A
-logout/login may be needed for the F-key change to fully apply.
+Grant Karabiner **Input Monitoring** / **Accessibility** permission if prompted.
+
+> ⚠️ **Log out and back in (or restart) after installing.** macOS only applies the
+> F-key (`fnState`) and the Spaces-shortcut changes at login — until you do, the top row
+> and `Ctrl+←/→` won't behave yet.
+
+For terminal word-jump, source the shell bindings from your `~/.zshrc`:
+
+```sh
+source /path/to/macboard/shell/macboard.zsh
+```
 
 ## Uninstall
 
@@ -97,10 +108,21 @@ Edit, then re-run `./install.sh`.
 - It's **SIGINT** (interrupt), which is the correct Linux `Ctrl+C` behavior — not
   literally SIGTERM.
 - The full matrix overrides some macOS Control defaults in GUI apps (e.g. `Ctrl+A` =
-  Select All instead of start-of-line, `Ctrl+←/→` = word-jump instead of switch-Spaces).
-  Mission Control (`Ctrl+↑`), `Ctrl+click`, and lock (`Ctrl+Cmd+Q`) still work.
+  Select All instead of start-of-line). Mission Control (`Ctrl+↑`), `Ctrl+click`, and
+  lock (`Ctrl+Cmd+Q`) still work.
+- macboard **disables the macOS "Move left/right a space" shortcut** so `Ctrl+←/→` is
+  free for word-jump (you lose Ctrl+arrow Space-switching — use a swipe / Mission Control,
+  or remap it). **Requires a logout/restart** to take effect.
+- **Terminal** word-jump (`Ctrl+←/→`, `Ctrl+Backspace/Delete`) relies on your shell
+  binding the Ctrl+arrow escape sequences — source [`shell/macboard.zsh`](shell/macboard.zsh).
 - The built-in keyboard loses `fn+Delete` forward-delete (the fn layer is now Control);
   use `Right-Option+Backspace`, or the dedicated Delete key on an external keyboard.
+
+## License
+
+[MIT](LICENSE) © Hyperi. The vendored files under `jsonnet/` (from
+[rux616/karabiner-windows-mode](https://github.com/rux616/karabiner-windows-mode)) are
+public-domain (Unlicense) and retain that dedication.
 
 ## Credits
 

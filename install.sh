@@ -67,6 +67,25 @@ python3 "${REPO_DIR}/scripts/merge_profile.py" ${CLEAN_FLAG} "${KARABINER_JSON}"
 say "Setting top row to standard F1–F12 (fnState)…"
 defaults write -g com.apple.keyboard.fnState -bool true
 
+# 6. Free Ctrl+←/→ from the macOS "Move left/right a space" shortcuts so those
+#    keystrokes reach the focused app/terminal (word-jump via your shell bindings)
+#    instead of switching Spaces. System-wide — not terminal-specific.
+#    NOTE: macOS only re-reads these shortcuts at login, so this needs a logout/restart.
+say "Freeing Ctrl+←/→ from Spaces switching (applies after logout/restart)…"
+python3 - <<'PY'
+import subprocess, plistlib
+dom = "com.apple.symbolichotkeys"
+out = subprocess.run(["defaults", "export", dom, "-"], capture_output=True).stdout
+data = plistlib.loads(out) if out.strip() else {}
+sk = data.setdefault("AppleSymbolicHotKeys", {})
+for k in ("79", "80", "81", "82"):  # Move left/right a space
+    entry = sk.get(k) if isinstance(sk.get(k), dict) else {}
+    entry["enabled"] = False
+    sk[k] = entry
+subprocess.run(["defaults", "import", dom, "-"], input=plistlib.dumps(data))
+PY
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
+
 cat <<EOF
 
 $(say "macboard installed.")
@@ -74,10 +93,14 @@ $(say "macboard installed.")
   • Terminals & IDEs keep raw Control (Ctrl+C = interrupt).
   • Top row = F1–F12;  Right-Option + F1…F12 = brightness / Mission Control / volume / media.
   • PrintScreen = Cmd+Shift+5;  Finder Delete = move to Trash.
+  • Ctrl+←/→ freed from Spaces-switching → word-jump in terminals (via your shell bindings).
 
   Backup: ${BACKUP}
   Revert: ./uninstall.sh
 
-  NOTE: macOS may need a logout/login for the F-key (fnState) change to fully apply.
-  If Karabiner asks for Input Monitoring / Accessibility permission, grant it.
+  >> LOG OUT AND BACK IN (or restart) to finish <<
+     macOS only applies the F-key (fnState) and the Spaces-shortcut changes at login.
+
+  • If Karabiner asks for Input Monitoring / Accessibility permission, grant it.
+  • Terminal word-jump needs your shell to bind Ctrl+arrow sequences — see shell/macboard.zsh.
 EOF
