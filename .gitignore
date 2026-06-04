@@ -1,0 +1,7 @@
+# Karabiner backups created by install.sh / uninstall.sh
+*.macboard-backup-*
+*.macboard-preuninstall-*
+*.macboard-tmp
+
+# macOS
+.DS_Store

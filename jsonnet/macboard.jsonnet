@@ -1,0 +1,105 @@
+// macboard — make a Mac keyboard behave like a Windows/Linux (QWERTY) keyboard
+// for a Linux/Windows developer's muscle memory.
+//
+// This file LAYERS our amendments on top of the vendored rux616/karabiner-windows-mode
+// ruleset (windows_shortcuts.jsonnet), which provides the core Ctrl->Cmd "matrix"
+// plus Windows-style navigation keys and terminal/IDE exemptions.
+//
+// The Globe->Control mapping is NOT here: it is a profile-level *simple modification*
+// (`fn -> left_control`) applied by the installer, because Karabiner runs simple
+// modifications BEFORE complex modifications. That ordering is what lets Globe+C arrive
+// at this matrix as `control+c` and get rewritten to `command+c` (copy) outside
+// terminals, while passing through raw as SIGINT inside terminals.
+//
+// ORDER MATTERS: our amendment rules are concatenated BEFORE the windows-mode rules so
+// that, on first-match-wins, the Right-Option media layer beats windows-mode's generic
+// `option+f4 -> Cmd+Q` / `option+tab -> Cmd+Tab` rules (those use bare `option`, which
+// also matches right_option). Our media rules require `right_option` specifically.
+
+local k = import 'lib/karabiner.libsonnet';
+local ws = import 'windows_shortcuts.jsonnet';
+
+//-------------------------------------------------------------------//
+// RIGHT-OPTION MEDIA LAYER                                           //
+// Top row is real F1-F12 (installer sets fnState=true). Because the  //
+// Globe/fn layer is gone, the rare Mac system ops live on Right ⌥.   //
+// Mirrors the stock Apple top row.                                   //
+//-------------------------------------------------------------------//
+local mediaLayer = [
+  k.rule('[macboard] Media: Right-Option+F1 -> Brightness Down',
+         k.input('f1', ['right_option']),
+         k.outputKey('display_brightness_decrement')),
+  k.rule('[macboard] Media: Right-Option+F2 -> Brightness Up',
+         k.input('f2', ['right_option']),
+         k.outputKey('display_brightness_increment')),
+  k.rule('[macboard] Media: Right-Option+F3 -> Mission Control',
+         k.input('f3', ['right_option']),
+         k.outputKey('mission_control')),
+  k.rule('[macboard] Media: Right-Option+F4 -> Spotlight (Cmd+Space)',
+         k.input('f4', ['right_option']),
+         k.outputKey('spacebar', ['command'])),
+  k.rule('[macboard] Media: Right-Option+F5 -> Keyboard Backlight Down',
+         k.input('f5', ['right_option']),
+         k.outputKey('illumination_decrement')),
+  k.rule('[macboard] Media: Right-Option+F6 -> Keyboard Backlight Up',
+         k.input('f6', ['right_option']),
+         k.outputKey('illumination_increment')),
+  k.rule('[macboard] Media: Right-Option+F7 -> Previous Track',
+         k.input('f7', ['right_option']),
+         k.outputKey('rewind')),
+  k.rule('[macboard] Media: Right-Option+F8 -> Play/Pause',
+         k.input('f8', ['right_option']),
+         k.outputKey('play_or_pause')),
+  k.rule('[macboard] Media: Right-Option+F9 -> Next Track',
+         k.input('f9', ['right_option']),
+         k.outputKey('fastforward')),
+  k.rule('[macboard] Media: Right-Option+F10 -> Mute',
+         k.input('f10', ['right_option']),
+         k.outputKey('mute')),
+  k.rule('[macboard] Media: Right-Option+F11 -> Volume Down',
+         k.input('f11', ['right_option']),
+         k.outputKey('volume_decrement')),
+  k.rule('[macboard] Media: Right-Option+F12 -> Volume Up',
+         k.input('f12', ['right_option']),
+         k.outputKey('volume_increment')),
+];
+
+//-------------------------------------------------------------------//
+// AUXILIARY / QUERY KEYS                                             //
+//-------------------------------------------------------------------//
+local auxKeys = [
+  // External Windows keyboard PrintScreen -> macOS screenshot toolbar.
+  k.rule('[macboard] PrintScreen -> Screenshot toolbar (Cmd+Shift+5)',
+         k.input('print_screen'),
+         k.outputKey('5', ['command', 'shift'])),
+  // The built-in keyboard has no forward-delete key (fn+Delete is gone now that
+  // Globe = Control). Give it back on Right-Option+Backspace. Does not collide with
+  // the media layer (that is Right-Option + F-row only).
+  k.rule('[macboard] Right-Option+Backspace -> Forward Delete (built-in board)',
+         k.input('delete_or_backspace', ['right_option']),
+         k.outputKey('delete_forward')),
+];
+
+//-------------------------------------------------------------------//
+// FINDER: make the Windows Delete key remove files like on Windows. //
+// Plain forward-delete still works in text everywhere else.         //
+//-------------------------------------------------------------------//
+local finder = ['^com\\.apple\\.finder$'];
+local finderDelete = [
+  k.rule('[macboard] Finder: Delete -> Move to Trash (Cmd+Delete)',
+         k.input('delete_forward'),
+         k.outputKey('delete_or_backspace', ['command']),
+         k.condition('if', finder)),
+  k.rule('[macboard] Finder: Shift+Delete -> Delete Immediately (Cmd+Opt+Delete)',
+         k.input('delete_forward', ['shift']),
+         k.outputKey('delete_or_backspace', ['command', 'option']),
+         k.condition('if', finder)),
+];
+
+//------//
+// MAIN //
+//------//
+{
+  title: 'macboard (Windows/Linux muscle memory)',
+  rules: mediaLayer + auxKeys + finderDelete + ws.rules,
+}
