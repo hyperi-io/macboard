@@ -10,6 +10,12 @@ KARABINER_DIR="${HOME}/.config/karabiner"
 KARABINER_JSON="${KARABINER_DIR}/karabiner.json"
 RENDERED="${REPO_DIR}/json/macboard.json"
 
+# --clean wipes your existing Karabiner keymap config and installs macboard-only.
+CLEAN_FLAG=""
+for arg in "$@"; do
+  [ "$arg" = "--clean" ] && CLEAN_FLAG="--clean"
+done
+
 say() { printf '\033[1;34m==>\033[0m %s\n' "$1"; }
 warn() { printf '\033[1;33m[!]\033[0m %s\n' "$1"; }
 
@@ -48,9 +54,13 @@ BACKUP="${KARABINER_JSON}.macboard-backup-$(date +%Y%m%d-%H%M%S)"
 cp "${KARABINER_JSON}" "${BACKUP}"
 say "Backed up live config -> ${BACKUP}"
 
-# 4. Merge macboard into the active profile (Globe=Control simple-mod + full ruleset).
-say "Merging macboard into your active profile…"
-python3 "${REPO_DIR}/scripts/merge_profile.py" "${KARABINER_JSON}" "${RENDERED}"
+# 4. Apply macboard (Globe=Control simple-mod + full ruleset).
+if [ -n "${CLEAN_FLAG}" ]; then
+  say "Clean install: replacing your existing Karabiner config with macboard-only…"
+else
+  say "Merging macboard into your active profile…"
+fi
+python3 "${REPO_DIR}/scripts/merge_profile.py" ${CLEAN_FLAG} "${KARABINER_JSON}" "${RENDERED}"
 
 # 5. Make the top row real F1-F12 (Globe is now Control, so the fn layer is gone;
 #    the rare Mac media ops live on Right-Option+F-key).

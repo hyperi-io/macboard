@@ -59,14 +59,18 @@ is unavoidable, not incidental.
 ## Install
 
 ```bash
-./install.sh
+./install.sh           # merge macboard into your existing profile
+./install.sh --clean    # wipe existing keymap config, install macboard-only
 ```
 
 The installer is idempotent and:
 1. Ensures Karabiner-Elements + `jsonnet` are installed (via Homebrew).
 2. Renders `jsonnet/macboard.jsonnet` → `json/macboard.json` and lints it.
 3. **Backs up** `~/.config/karabiner/karabiner.json` (timestamped).
-4. Merges the `fn→left_control` simple-mod and the full ruleset into your **active** profile.
+4. Applies the `fn→left_control` simple-mod and the full ruleset. By default it
+   **merges** into your active profile; `--clean` instead replaces your whole config
+   with a single pristine macboard profile (other profiles / per-device settings dropped;
+   Karabiner re-detects devices automatically).
 5. Sets the top row to standard F1–F12 (`fnState`).
 
 Grant Karabiner **Input Monitoring** / **Accessibility** permission if prompted. A
