@@ -5,3 +5,12 @@
 
 # macOS
 .DS_Store
+
+# Claude Code / AI assistant artifacts
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.claude.json
+.cursor/
+.aider*
+
