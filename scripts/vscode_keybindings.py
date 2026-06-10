@@ -11,6 +11,9 @@ ADDITIVE and NON-DESTRUCTIVE:
   - Every Ctrl binding is scoped with `!terminalFocus`, so VS Code's integrated
     terminal stays raw (Ctrl+C = SIGINT, Ctrl+A/E/W = readline). Cmd shortcuts still
     work in the terminal.
+  - Also sets `keyboard.dispatch: keyCode` in settings.json — REQUIRED for the editor to
+    honor the Globe->Control remap (without it none of these Ctrl bindings fire). Only
+    added if you haven't set it yourself; takes effect on the next VS Code restart.
 
 Targets every installed app among: VS Code, VS Code Insiders, Cursor, VSCodium.
 """
@@ -163,6 +166,32 @@ def apply_to(name, support_dir):
         print(f"           kept your existing bindings for: {', '.join(skipped)}")
 
 
+def ensure_dispatch(name, support_dir):
+    """Set keyboard.dispatch=keyCode so the editor honors the Globe->Control remap.
+
+    Without this, VS Code / Electron ignores the remapped Control modifier and none of
+    the Ctrl bindings above fire. Comment-preserving: only inserts if the key is absent.
+    """
+    settings = os.path.join(support_dir, "User", "settings.json")
+    raw = open(settings, encoding="utf-8").read() if os.path.exists(settings) else ""
+    if "keyboard.dispatch" in raw:
+        return  # already configured — respect the user's choice
+    if os.path.exists(settings):
+        ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        shutil.copy2(settings, f"{settings}.macboard-backup-{ts}")
+    if raw.strip() in ("", "{}"):
+        new = '{\n    "keyboard.dispatch": "keyCode"\n}\n'
+    else:
+        i = raw.find("{")
+        if i == -1:
+            return  # not a JSON object we understand — leave it alone
+        new = raw[:i + 1] + '\n    "keyboard.dispatch": "keyCode",' + raw[i + 1:]
+    os.makedirs(os.path.dirname(settings), exist_ok=True)
+    with open(settings, "w", encoding="utf-8") as f:
+        f.write(new)
+    print(f"  {name}: set keyboard.dispatch=keyCode (restart {name} to apply)")
+
+
 def main():
     base = os.path.expanduser("~/Library/Application Support")
     found = False
@@ -171,6 +200,7 @@ def main():
         if os.path.isdir(support):
             found = True
             apply_to(name, support)
+            ensure_dispatch(name, support)
     if not found:
         print("  (no VS Code / Cursor install found — skipping)")
 

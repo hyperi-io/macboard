@@ -99,7 +99,8 @@ $(say "macboard installed.")
   • Top row = F1–F12;  Right-Option + F1…F12 = brightness / Mission Control / volume / media.
   • PrintScreen = Cmd+Shift+5;  Finder Delete = move to Trash.
   • Ctrl+←/→ freed from Spaces-switching → word-jump in terminals (via your shell bindings).
-  • VS Code / Cursor: Windows-style Ctrl shortcuts added (Cmd still works; terminal stays raw).
+  • VS Code / Cursor: Windows-style Ctrl shortcuts added — RESTART the editor to apply
+    (macboard also sets keyboard.dispatch=keyCode so it honors Globe→Control).
 
   Backups are timestamped in ~/.config/karabiner/ (written only when something changed).
   Revert: ./uninstall.sh

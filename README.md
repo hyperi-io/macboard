@@ -122,6 +122,9 @@ Edit, then re-run `./install.sh`.
   or remap it). **Requires a logout/restart** to take effect.
 - **Terminal** word-jump (`Ctrl+←/→`, `Ctrl+Backspace/Delete`) relies on your shell
   binding the Ctrl+arrow escape sequences — source [`shell/macboard.zsh`](shell/macboard.zsh).
+- **VS Code / Cursor need a restart** after install: macboard sets
+  `keyboard.dispatch: keyCode` so the editor honors the Globe→Control remap (without it,
+  *none* of the editor Ctrl bindings fire), and that setting only applies on restart.
 - The built-in keyboard loses `fn+Delete` forward-delete (the fn layer is now Control);
   use `Right-Option+Backspace`, or the dedicated Delete key on an external keyboard.
 
