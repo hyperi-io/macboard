@@ -53,6 +53,10 @@
     '^com\\.citrix\\.XenAppViewer$',
     // Microsoft Remote Desktop Connection
     '^com\\.microsoft\\.rdc\\.macos$',
+    // Thincast Remote Desktop Client
+    '^com\\.thincast\\.rdc\\.app$',
+    // Thincast RD WebAccess Client
+    '^com\\.thincast\\.client\\.rdwebaccessclient$',
   ],
 
   // bundle identifiers for terminal emulator applications

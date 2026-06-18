@@ -429,6 +429,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -487,6 +489,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -545,6 +549,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -605,6 +611,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -664,6 +672,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -722,6 +732,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -777,6 +789,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -837,6 +851,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -896,6 +912,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -954,6 +972,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1004,6 +1024,8 @@
                         "^com\\.mitchellh\\.ghostty$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$"
@@ -1053,6 +1075,8 @@
                         "^com\\.mitchellh\\.ghostty$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$"
@@ -1104,6 +1128,8 @@
                         "^com\\.mitchellh\\.ghostty$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$"
@@ -1153,6 +1179,8 @@
                         "^com\\.mitchellh\\.ghostty$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$"
@@ -1204,6 +1232,8 @@
                         "^com\\.mitchellh\\.ghostty$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$"
@@ -1253,6 +1283,8 @@
                         "^com\\.mitchellh\\.ghostty$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$"
@@ -1307,6 +1339,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1365,6 +1399,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1425,6 +1461,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1483,6 +1521,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1541,6 +1581,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1599,6 +1641,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1657,6 +1701,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1715,6 +1761,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1773,6 +1821,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1831,6 +1881,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1889,6 +1941,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -1947,6 +2001,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2005,6 +2061,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2063,6 +2121,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2116,6 +2176,8 @@
                         "^com\\.mitchellh\\.ghostty$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$"
@@ -2170,6 +2232,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2228,6 +2292,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2286,6 +2352,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2344,6 +2412,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2402,6 +2472,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2460,6 +2532,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2516,6 +2590,8 @@
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
                         "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
@@ -2561,7 +2637,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2600,7 +2678,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2639,7 +2719,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2678,7 +2760,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2717,7 +2801,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2756,7 +2842,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2795,7 +2883,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2834,7 +2924,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2873,7 +2965,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -3156,7 +3250,9 @@
                         "^com\\.ScooterSoftware",
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -3207,7 +3303,9 @@
                         "^com\\.ScooterSoftware",
                         "^dev\\.zed\\.Zed$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -3983,7 +4081,9 @@
                         "^com\\.parallels\\.desktop\\.console$",
                         "^org\\.vmware\\.fusion$",
                         "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
