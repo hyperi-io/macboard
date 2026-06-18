@@ -24,6 +24,36 @@ local unless_remoteDesktop_hypervisor = k.condition(
   file_paths.remoteDesktops
 );
 
+// Windows word-motion + plain-Ctrl+V paste fire in normal apps AND the VS Code family
+// (the Claude Code panel + editor, and -- best effort -- VS Code's integrated terminal),
+// translating Ctrl+arrow -> Option+arrow and Ctrl+V -> Cmd+V for inputs that honour Mac
+// motion but ignore raw Ctrl. They are DELIBERATELY excluded from SYSTEM terminal emulators
+// (Terminal.app/Ghostty): those stay PURE LINUX -- raw Ctrl reaches the shell/Claude TUI
+// where readline + shell/macboard.zsh handle word-motion exactly as on Linux, and plain
+// Ctrl+V stays quoted-insert (paste is Ctrl+Shift+V). Remote desktops + hypervisors keep
+// raw Ctrl too (they're literally Windows). Ctrl+C/X/Z/A copy/cut/undo/select-all live in
+// the separate VS Code-family rules; Ctrl+Shift+C/V + Ctrl/Shift+Insert handle terminals.
+local unless_systemTerminal = k.condition(
+  'unless',
+  bundle.terminalEmulators + bundle.remoteDesktops + bundle.hypervisors,
+  file_paths.remoteDesktops
+);
+
+// Terminal-style copy/paste belongs in every terminal-LIKE surface: real terminal
+// emulators AND Claude Code's IDE panel + the VS Code integrated terminal. There Ctrl+C
+// is reserved for interrupt, so copy/paste shift up to Ctrl+Shift+C/V and Ctrl/Shift+Insert
+// (the Linux-terminal convention). Normal apps don't need it -- they copy with plain Ctrl+C.
+local if_terminal_or_ide = k.condition('if', bundle.terminalEmulators + bundle.ides);
+
+// The VS Code family hosts the Claude Code panel, whose webview input can't be reached by
+// VS Code's own keybindings -- so we give it the full Windows edit cluster (Ctrl+C copy,
+// Ctrl+X cut, Ctrl+Z/Shift+Z undo/redo, Ctrl+A select-all) at the Karabiner layer. Scoped
+// to VS Code/Cursor ONLY (not the wider `ides` bundle): Karabiner can't tell the panel
+// from VS Code's integrated terminal, so this DOES cost Ctrl+C=interrupt there -- the user
+// runs shells in standalone terminal emulators (Terminal.app/Ghostty), where Ctrl+C stays
+// raw, so that trade is accepted. Ctrl+V paste is already handled by ide_terminal_safe.
+local if_vscode_family = k.condition('if', bundle.vscodeFamily);
+
 //------//
 // MAIN //
 //------//
@@ -74,27 +104,27 @@ local unless_remoteDesktop_hypervisor = k.condition(
     k.rule('Left Arrow (Ctrl)',
            k.input('left_arrow', ['control']),
            k.outputKey('left_arrow', ['option']),
-           unless_hypervisor_ide_remoteDesktop_terminalEmulator),
+           unless_systemTerminal),
     k.rule('Left Arrow (Ctrl+Shift)',
            k.input('left_arrow', ['control', 'shift']),
            k.outputKey('left_arrow', ['option', 'shift']),
-           unless_hypervisor_ide_remoteDesktop_terminalEmulator),
+           unless_systemTerminal),
     k.rule('Right Arrow (Ctrl)',
            k.input('right_arrow', ['control']),
            k.outputKey('right_arrow', ['option']),
-           unless_hypervisor_ide_remoteDesktop_terminalEmulator),
+           unless_systemTerminal),
     k.rule('Right Arrow (Ctrl+Shift)',
            k.input('right_arrow', ['control', 'shift']),
            k.outputKey('right_arrow', ['option', 'shift']),
-           unless_hypervisor_ide_remoteDesktop_terminalEmulator),
+           unless_systemTerminal),
     k.rule('Backspace (Ctrl)',
            k.input('delete_or_backspace', ['control']),
            k.outputKey('delete_or_backspace', ['option']),
-           unless_hypervisor_ide_remoteDesktop_terminalEmulator),
+           unless_systemTerminal),
     k.rule('Delete (Ctrl)',
            k.input('delete_forward', ['control']),
            k.outputKey('delete_forward', ['option']),
-           unless_hypervisor_ide_remoteDesktop_terminalEmulator),
+           unless_systemTerminal),
     k.rule('Enter (Ctrl)',
            k.input('return_or_enter', ['control']),
            k.outputKey('return_or_enter', ['command']),
@@ -154,7 +184,7 @@ local unless_remoteDesktop_hypervisor = k.condition(
     k.rule('V (Ctrl)',
            k.input('v', ['control']),
            k.outputKey('v', ['command']),
-           unless_hypervisor_ide_remoteDesktop_terminalEmulator),
+           unless_systemTerminal),
     k.rule('W (Ctrl)',
            k.input('w', ['control']),
            k.outputKey('w', ['command']),
@@ -240,14 +270,14 @@ local unless_remoteDesktop_hypervisor = k.condition(
            k.input('l', ['control', 'option']),
            k.outputKey('power', ['control', 'shift'])),
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    k.rule('Insert (Ctrl) [+Terminal Emulators]',
+    k.rule('Insert (Ctrl) [+Terminal Emulators + IDEs]',
            k.input('insert', ['control']),
            k.outputKey('c', ['command']),
-           unless_hypervisor_ide_remoteDesktop),
-    k.rule('Insert (Shift) [+Terminal Emulators]',
+           if_terminal_or_ide),
+    k.rule('Insert (Shift) [+Terminal Emulators + IDEs]',
            k.input('insert', ['shift']),
            k.outputKey('v', ['command']),
-           unless_hypervisor_ide_remoteDesktop),
+           if_terminal_or_ide),
     k.rule('/ (Ctrl) [+Terminal Emulators]',
            k.input('slash', ['control']),
            k.outputKey('slash', ['command']),
@@ -257,14 +287,73 @@ local unless_remoteDesktop_hypervisor = k.condition(
            k.outputKey('q', ['command']),
            unless_hypervisor_ide_remoteDesktop),
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    k.rule('C (Ctrl+Shift) [Only Terminal Emulators]',
+    k.rule('C (Ctrl+Shift) [Terminal Emulators + IDEs]',
            k.input('c', ['control', 'shift']),
            k.outputKey('c', ['command']),
-           k.condition('if', bundle.terminalEmulators)),
-    k.rule('V (Ctrl+Shift) [Only Terminal Emulators]',
+           if_terminal_or_ide),
+    k.rule('V (Ctrl+Shift) [Terminal Emulators + IDEs]',
            k.input('v', ['control', 'shift']),
            k.outputKey('v', ['command']),
-           k.condition('if', bundle.terminalEmulators)),
+           if_terminal_or_ide),
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Windows edit cluster for the Claude Code panel (VS Code family only). Ctrl+V paste is
+    // already covered by ide_terminal_safe; these add copy/cut/undo/redo/select-all.
+    k.rule('C (Ctrl) [Only VS Code family -> copy in the Claude Code panel]',
+           k.input('c', ['control']),
+           k.outputKey('c', ['command']),
+           if_vscode_family),
+    k.rule('X (Ctrl) [Only VS Code family]',
+           k.input('x', ['control']),
+           k.outputKey('x', ['command']),
+           if_vscode_family),
+    k.rule('Z (Ctrl) [Only VS Code family]',
+           k.input('z', ['control']),
+           k.outputKey('z', ['command']),
+           if_vscode_family),
+    k.rule('Z (Ctrl+Shift) [Only VS Code family -> redo]',
+           k.input('z', ['control', 'shift']),
+           k.outputKey('z', ['command', 'shift']),
+           if_vscode_family),
+    k.rule('A (Ctrl) [Only VS Code family -> select all]',
+           k.input('a', ['control']),
+           k.outputKey('a', ['command']),
+           if_vscode_family),
+    // Home/End for the Claude Code editable text box (dead there natively). Mac-native line/
+    // input motion; VS Code family only so Emacs/Kitty + system terminals keep raw Home/End.
+    // MOST-SPECIFIC FIRST: bare Home/End match any extra modifiers, so the Ctrl/Shift
+    // variants must precede them or they'd be shadowed.
+    k.rule('Home (Ctrl+Shift) [Only VS Code family -> select to input start]',
+           k.input('home', ['control', 'shift']),
+           k.outputKey('up_arrow', ['command', 'shift']),
+           if_vscode_family),
+    k.rule('Home (Shift) [Only VS Code family -> select to line start]',
+           k.input('home', ['shift']),
+           k.outputKey('left_arrow', ['command', 'shift']),
+           if_vscode_family),
+    k.rule('Home (Ctrl) [Only VS Code family -> input start]',
+           k.input('home', ['control']),
+           k.outputKey('up_arrow', ['command']),
+           if_vscode_family),
+    k.rule('Home [Only VS Code family -> line start]',
+           k.input('home'),
+           k.outputKey('left_arrow', ['command']),
+           if_vscode_family),
+    k.rule('End (Ctrl+Shift) [Only VS Code family -> select to input end]',
+           k.input('end', ['control', 'shift']),
+           k.outputKey('down_arrow', ['command', 'shift']),
+           if_vscode_family),
+    k.rule('End (Shift) [Only VS Code family -> select to line end]',
+           k.input('end', ['shift']),
+           k.outputKey('right_arrow', ['command', 'shift']),
+           if_vscode_family),
+    k.rule('End (Ctrl) [Only VS Code family -> input end]',
+           k.input('end', ['control']),
+           k.outputKey('down_arrow', ['command']),
+           if_vscode_family),
+    k.rule('End [Only VS Code family -> line end]',
+           k.input('end'),
+           k.outputKey('right_arrow', ['command']),
+           if_vscode_family),
     ////////////////////////////////////////////////////////////////////////////////////////////////
     k.rule('H (Ctrl) [Only Web Browsers]',
            k.input('h', ['control']),

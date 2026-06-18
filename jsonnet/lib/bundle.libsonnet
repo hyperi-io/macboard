@@ -34,6 +34,19 @@
     '^dev\\.zed\\.Zed$',
   ],
 
+  // bundle identifiers for the VS Code family (editors that host the Claude Code panel).
+  // Narrower than `ides` ON PURPOSE: these get Windows clipboard keys (incl. Ctrl+C=copy),
+  // which would be destructive for the other IDEs -- Emacs (Ctrl+C is its prefix key) and
+  // Kitty (a terminal needing Ctrl+C=interrupt) -- so they are deliberately NOT included.
+  vscodeFamily: [
+    // Microsoft VS Code + VS Code Insiders (prefix match)
+    '^com\\.microsoft\\.VSCode',
+    // VSCodium
+    '^com\\.vscodium$',
+    // Cursor (todesktop-packaged; published bundle id)
+    '^com\\.todesktop\\.230313mzl4w4u92$',
+  ],
+
   // bundle identifiers for remote desktop applications
   remoteDesktops: [
     // Citrix XenAppViewer

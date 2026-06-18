@@ -995,27 +995,18 @@
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
-                        "^org\\.gnu\\.emacs$",
-                        "^org\\.gnu\\.Emacs$",
-                        "^com\\.jetbrains",
-                        "^com\\.microsoft\\.VSCode",
-                        "^com\\.vscodium$",
-                        "^com\\.sublimetext\\.3$",
-                        "^net\\.kovidgoyal\\.kitty$",
-                        "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -1053,27 +1044,18 @@
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
-                        "^org\\.gnu\\.emacs$",
-                        "^org\\.gnu\\.Emacs$",
-                        "^com\\.jetbrains",
-                        "^com\\.microsoft\\.VSCode",
-                        "^com\\.vscodium$",
-                        "^com\\.sublimetext\\.3$",
-                        "^net\\.kovidgoyal\\.kitty$",
-                        "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -1113,27 +1095,18 @@
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
-                        "^org\\.gnu\\.emacs$",
-                        "^org\\.gnu\\.Emacs$",
-                        "^com\\.jetbrains",
-                        "^com\\.microsoft\\.VSCode",
-                        "^com\\.vscodium$",
-                        "^com\\.sublimetext\\.3$",
-                        "^net\\.kovidgoyal\\.kitty$",
-                        "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -1171,27 +1144,18 @@
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
-                        "^org\\.gnu\\.emacs$",
-                        "^org\\.gnu\\.Emacs$",
-                        "^com\\.jetbrains",
-                        "^com\\.microsoft\\.VSCode",
-                        "^com\\.vscodium$",
-                        "^com\\.sublimetext\\.3$",
-                        "^net\\.kovidgoyal\\.kitty$",
-                        "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -1231,27 +1195,18 @@
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
-                        "^org\\.gnu\\.emacs$",
-                        "^org\\.gnu\\.Emacs$",
-                        "^com\\.jetbrains",
-                        "^com\\.microsoft\\.VSCode",
-                        "^com\\.vscodium$",
-                        "^com\\.sublimetext\\.3$",
-                        "^net\\.kovidgoyal\\.kitty$",
-                        "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -1289,27 +1244,18 @@
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
-                        "^org\\.gnu\\.emacs$",
-                        "^org\\.gnu\\.Emacs$",
-                        "^com\\.jetbrains",
-                        "^com\\.microsoft\\.VSCode",
-                        "^com\\.vscodium$",
-                        "^com\\.sublimetext\\.3$",
-                        "^net\\.kovidgoyal\\.kitty$",
-                        "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -2161,27 +2107,18 @@
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
-                        "^org\\.gnu\\.emacs$",
-                        "^org\\.gnu\\.Emacs$",
-                        "^com\\.jetbrains",
-                        "^com\\.microsoft\\.VSCode",
-                        "^com\\.vscodium$",
-                        "^com\\.sublimetext\\.3$",
-                        "^net\\.kovidgoyal\\.kitty$",
-                        "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$",
                         "^com\\.alacritty$",
                         "^io\\.alacritty$",
                         "^co\\.zeit\\.hyper$",
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$"
                      ],
                      "file_paths": [
                         "Chrome Remote Desktop\\.app"
@@ -3100,15 +3037,19 @@
          ]
       },
       {
-         "description": "Insert (Ctrl) [+Terminal Emulators]",
+         "description": "Insert (Ctrl) [+Terminal Emulators + IDEs]",
          "manipulators": [
             {
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
+                        "^com\\.alacritty$",
+                        "^io\\.alacritty$",
+                        "^co\\.zeit\\.hyper$",
+                        "^com\\.googlecode\\.iterm2$",
+                        "^com\\.apple\\.Terminal$",
+                        "^com\\.github\\.wez\\.wezterm$",
+                        "^com\\.mitchellh\\.ghostty$",
                         "^org\\.gnu\\.emacs$",
                         "^org\\.gnu\\.Emacs$",
                         "^com\\.jetbrains",
@@ -3117,14 +3058,9 @@
                         "^com\\.sublimetext\\.3$",
                         "^net\\.kovidgoyal\\.kitty$",
                         "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^dev\\.zed\\.Zed$"
                      ],
-                     "file_paths": [
-                        "Chrome Remote Desktop\\.app"
-                     ],
-                     "type": "frontmost_application_unless"
+                     "type": "frontmost_application_if"
                   }
                ],
                "from": {
@@ -3151,15 +3087,19 @@
          ]
       },
       {
-         "description": "Insert (Shift) [+Terminal Emulators]",
+         "description": "Insert (Shift) [+Terminal Emulators + IDEs]",
          "manipulators": [
             {
                "conditions": [
                   {
                      "bundle_identifiers": [
-                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
-                        "^com\\.parallels\\.desktop\\.console$",
-                        "^org\\.vmware\\.fusion$",
+                        "^com\\.alacritty$",
+                        "^io\\.alacritty$",
+                        "^co\\.zeit\\.hyper$",
+                        "^com\\.googlecode\\.iterm2$",
+                        "^com\\.apple\\.Terminal$",
+                        "^com\\.github\\.wez\\.wezterm$",
+                        "^com\\.mitchellh\\.ghostty$",
                         "^org\\.gnu\\.emacs$",
                         "^org\\.gnu\\.Emacs$",
                         "^com\\.jetbrains",
@@ -3168,14 +3108,9 @@
                         "^com\\.sublimetext\\.3$",
                         "^net\\.kovidgoyal\\.kitty$",
                         "^com\\.ScooterSoftware",
-                        "^dev\\.zed\\.Zed$",
-                        "^com\\.citrix\\.XenAppViewer$",
-                        "^com\\.microsoft\\.rdc\\.macos$"
+                        "^dev\\.zed\\.Zed$"
                      ],
-                     "file_paths": [
-                        "Chrome Remote Desktop\\.app"
-                     ],
-                     "type": "frontmost_application_unless"
+                     "type": "frontmost_application_if"
                   }
                ],
                "from": {
@@ -3304,7 +3239,7 @@
          ]
       },
       {
-         "description": "C (Ctrl+Shift) [Only Terminal Emulators]",
+         "description": "C (Ctrl+Shift) [Terminal Emulators + IDEs]",
          "manipulators": [
             {
                "conditions": [
@@ -3316,7 +3251,16 @@
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^org\\.gnu\\.emacs$",
+                        "^org\\.gnu\\.Emacs$",
+                        "^com\\.jetbrains",
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.sublimetext\\.3$",
+                        "^net\\.kovidgoyal\\.kitty$",
+                        "^com\\.ScooterSoftware",
+                        "^dev\\.zed\\.Zed$"
                      ],
                      "type": "frontmost_application_if"
                   }
@@ -3346,7 +3290,7 @@
          ]
       },
       {
-         "description": "V (Ctrl+Shift) [Only Terminal Emulators]",
+         "description": "V (Ctrl+Shift) [Terminal Emulators + IDEs]",
          "manipulators": [
             {
                "conditions": [
@@ -3358,7 +3302,16 @@
                         "^com\\.googlecode\\.iterm2$",
                         "^com\\.apple\\.Terminal$",
                         "^com\\.github\\.wez\\.wezterm$",
-                        "^com\\.mitchellh\\.ghostty$"
+                        "^com\\.mitchellh\\.ghostty$",
+                        "^org\\.gnu\\.emacs$",
+                        "^org\\.gnu\\.Emacs$",
+                        "^com\\.jetbrains",
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.sublimetext\\.3$",
+                        "^net\\.kovidgoyal\\.kitty$",
+                        "^com\\.ScooterSoftware",
+                        "^dev\\.zed\\.Zed$"
                      ],
                      "type": "frontmost_application_if"
                   }
@@ -3378,6 +3331,489 @@
                "to": [
                   {
                      "key_code": "v",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "C (Ctrl) [Only VS Code family -> copy in the Claude Code panel]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "c",
+                  "modifiers": {
+                     "mandatory": [
+                        "control"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "c",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "X (Ctrl) [Only VS Code family]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "x",
+                  "modifiers": {
+                     "mandatory": [
+                        "control"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "x",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "Z (Ctrl) [Only VS Code family]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "z",
+                  "modifiers": {
+                     "mandatory": [
+                        "control"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "z",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "Z (Ctrl+Shift) [Only VS Code family -> redo]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "z",
+                  "modifiers": {
+                     "mandatory": [
+                        "control",
+                        "shift"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "z",
+                     "modifiers": [
+                        "command",
+                        "shift"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "A (Ctrl) [Only VS Code family -> select all]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "a",
+                  "modifiers": {
+                     "mandatory": [
+                        "control"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "a",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "Home (Ctrl+Shift) [Only VS Code family -> select to input start]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "home",
+                  "modifiers": {
+                     "mandatory": [
+                        "control",
+                        "shift"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "up_arrow",
+                     "modifiers": [
+                        "command",
+                        "shift"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "Home (Shift) [Only VS Code family -> select to line start]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "home",
+                  "modifiers": {
+                     "mandatory": [
+                        "shift"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "left_arrow",
+                     "modifiers": [
+                        "command",
+                        "shift"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "Home (Ctrl) [Only VS Code family -> input start]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "home",
+                  "modifiers": {
+                     "mandatory": [
+                        "control"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "up_arrow",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "Home [Only VS Code family -> line start]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "home",
+                  "modifiers": {
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "left_arrow",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "End (Ctrl+Shift) [Only VS Code family -> select to input end]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "end",
+                  "modifiers": {
+                     "mandatory": [
+                        "control",
+                        "shift"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "down_arrow",
+                     "modifiers": [
+                        "command",
+                        "shift"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "End (Shift) [Only VS Code family -> select to line end]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "end",
+                  "modifiers": {
+                     "mandatory": [
+                        "shift"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "right_arrow",
+                     "modifiers": [
+                        "command",
+                        "shift"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "End (Ctrl) [Only VS Code family -> input end]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "end",
+                  "modifiers": {
+                     "mandatory": [
+                        "control"
+                     ],
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "down_arrow",
+                     "modifiers": [
+                        "command"
+                     ]
+                  }
+               ],
+               "type": "basic"
+            }
+         ]
+      },
+      {
+         "description": "End [Only VS Code family -> line end]",
+         "manipulators": [
+            {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^com\\.microsoft\\.VSCode",
+                        "^com\\.vscodium$",
+                        "^com\\.todesktop\\.230313mzl4w4u92$"
+                     ],
+                     "type": "frontmost_application_if"
+                  }
+               ],
+               "from": {
+                  "key_code": "end",
+                  "modifiers": {
+                     "optional": [
+                        "any"
+                     ]
+                  }
+               },
+               "to": [
+                  {
+                     "key_code": "right_arrow",
                      "modifiers": [
                         "command"
                      ]
