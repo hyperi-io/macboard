@@ -34,6 +34,14 @@ fi
 say "Checking jsonnet…"
 command -v jsonnet >/dev/null 2>&1 || { say "Installing jsonnet…"; brew install jsonnet; }
 
+# AltTab gives Windows-style per-window Alt+Tab switching. The cask auto-updates
+# itself, so installing it once here is all the maintenance it needs.
+say "Checking AltTab…"
+if ! brew list --cask alt-tab >/dev/null 2>&1 && [ ! -d "/Applications/AltTab.app" ]; then
+  say "Installing AltTab…"
+  brew install --cask alt-tab
+fi
+
 # 2. Render jsonnet -> json and lint it.
 say "Rendering config…"
 mkdir -p "${REPO_DIR}/json"
@@ -91,13 +99,32 @@ PY
 say "Adding Ctrl keybindings to VS Code / Cursor (if installed)…"
 python3 "${REPO_DIR}/scripts/vscode_keybindings.py" || true
 
+# 8. Source the shell word/line-motion bindings from ~/.zshrc so they load in every new
+#    shell (terminal Ctrl+arrow word-jump and Home/End). Idempotent: skipped if already
+#    sourced; ~/.zshrc is backed up (timestamped) only when this actually appends.
+say "Ensuring ~/.zshrc sources macboard.zsh…"
+ZSHRC="${HOME}/.zshrc"
+if [ -f "${ZSHRC}" ] && grep -qF "shell/macboard.zsh" "${ZSHRC}"; then
+  say "~/.zshrc already sources macboard.zsh; leaving as is."
+else
+  [ -f "${ZSHRC}" ] && cp "${ZSHRC}" "${ZSHRC}.macboard-backup-$(date +%Y%m%d-%H%M%S)"
+  {
+    printf '\n# macboard: PC-style word/line navigation at the zsh prompt\n'
+    printf 'source "%s/shell/macboard.zsh"\n' "${REPO_DIR}"
+  } >> "${ZSHRC}"
+  say "Added source line to ~/.zshrc (open a new terminal to apply)."
+fi
+
 cat <<EOF
 
 $(say "macboard installed.")
   • Globe (bottom-left) is now Control; Ctrl+C/V/X/Z/S/… work Windows-style.
-  • Terminals & IDEs keep raw Control (Ctrl+C = interrupt).
+  • System terminals stay raw Control (Ctrl+C = interrupt; copy/paste = Ctrl+Shift+C/V).
+  • VS Code + Claude Code panel: Ctrl+C/V/X/Z/A and word/line motion work Windows-style.
   • Top row = F1–F12;  Right-Option + F1…F12 = brightness / Mission Control / volume / media.
   • PrintScreen = Cmd+Shift+5;  Finder Delete = move to Trash.
+  • AltTab installed — Windows-style per-window switching (grant it Accessibility +
+    Screen Recording permission on first launch).
   • Ctrl+←/→ freed from Spaces-switching → word-jump in terminals (via your shell bindings).
   • VS Code / Cursor: Windows-style Ctrl shortcuts added — RESTART the editor to apply
     (macboard also sets keyboard.dispatch=keyCode so it honors Globe→Control).
@@ -109,5 +136,5 @@ $(say "macboard installed.")
      macOS only applies the F-key (fnState) and the Spaces-shortcut changes at login.
 
   • If Karabiner asks for Input Monitoring / Accessibility permission, grant it.
-  • Terminal word-jump needs your shell to bind Ctrl+arrow sequences — see shell/macboard.zsh.
+  • Shell word/line motion auto-loads via ~/.zshrc (open a new terminal); see shell/macboard.zsh.
 EOF
