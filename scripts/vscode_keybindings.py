@@ -90,6 +90,14 @@ BINDINGS = [
     # --- markdown preview (your original request) ---
     b("ctrl+shift+v", "markdown.showPreview", f"editorLangId == markdown && {NT}"),
     b("ctrl+k v", "markdown.showPreviewToSide", f"editorLangId == markdown && {NT}"),
+    # --- integrated terminal: selection-aware, like Linux/Windows VS Code ---
+    # No selection -> Ctrl+C is NOT captured here, so it falls through to the shell as
+    # interrupt (SIGINT). WITH a selection it copies -- the "non-terminal" behaviour you
+    # want on scrollback. Readline keys (Ctrl+A/E, Ctrl+Left, ...) stay raw, not bound.
+    b("ctrl+c", "workbench.action.terminal.copySelection", "terminalFocus && terminalTextSelected"),
+    b("ctrl+shift+c", "workbench.action.terminal.copySelection", "terminalFocus && terminalTextSelected"),
+    b("ctrl+v", "workbench.action.terminal.paste", "terminalFocus"),
+    b("ctrl+shift+v", "workbench.action.terminal.paste", "terminalFocus"),
 ]
 
 APP_DIRS = {
