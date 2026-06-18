@@ -41,6 +41,17 @@ subprocess.run(["defaults", "import", dom, "-"], input=plistlib.dumps(data))
 PY
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
 
+# Remove the macboard source line install.sh added to ~/.zshrc. Idempotent: no-op if
+# absent; ~/.zshrc backed up (timestamped) only when it actually changes.
+ZSHRC="${HOME}/.zshrc"
+if [ -f "${ZSHRC}" ] && grep -qF "shell/macboard.zsh" "${ZSHRC}"; then
+  say "Removing macboard source line from ~/.zshrc…"
+  cp "${ZSHRC}" "${ZSHRC}.macboard-preuninstall-$(date +%Y%m%d-%H%M%S)"
+  grep -vF -e "shell/macboard.zsh" \
+           -e "# macboard: PC-style word/line navigation at the zsh prompt" \
+           "${ZSHRC}" > "${ZSHRC}.tmp" && mv "${ZSHRC}.tmp" "${ZSHRC}"
+fi
+
 say "Done. Karabiner-Elements will auto-reload the restored config."
 echo "  (Log out / restart to fully restore the F-key and Spaces shortcuts.)"
 echo "  (Karabiner-Elements itself was left installed; remove with: brew uninstall --cask karabiner-elements)"
