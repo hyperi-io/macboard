@@ -38,14 +38,16 @@ Apple Silicon MacBook (tested on an M-series Air), recent macOS. **macOS only.**
 |------|----------|
 | **Globe key (bottom-left)** | Acts as **Control**. One-way `fn → left_control` simple modification — your real Control key is untouched, you just gain a Control in the Windows position. |
 | **Ctrl shortcuts** | `Ctrl+C/V/X/Z/A/S/F/W/T/N/…` are translated to their `Cmd` equivalents (copy/paste/cut/undo/select-all/save/find/close/new-tab/new) — Windows-style — **everywhere except terminals and IDEs**. |
-| **Terminals (Terminal.app, Ghostty, iTerm2, …)** | Exempted from the translation, so **`Ctrl+C` = interrupt (SIGINT)** like on Linux. `Ctrl+Shift+C/V` = copy/paste in terminals. |
+| **System terminals (Terminal.app, Ghostty, iTerm2, …)** | Exempted from the translation, so **`Ctrl+C` = interrupt (SIGINT)** like on Linux. `Ctrl+Shift+C/V` = copy/paste; `Ctrl+←/→` and `Home`/`End` word/line motion come from the shell bindings ([`shell/macboard.zsh`](shell/macboard.zsh)). |
 | **Command keys** | Unchanged and additive: `Cmd+C` still copies, so copy works from *both* the Globe/Control key and Command. |
 | **Top function row** | Real **F1–F12** by default (on both keyboards). The rare Mac system ops move to a **Right-Option layer**. |
 | **Right-Option + F1…F12** | Brightness ↓↑, Mission Control, Spotlight, keyboard backlight ↓↑, ⏮ ⏯ ⏭, mute, volume ↓↑. |
 | **PrintScreen** | Opens the macOS screenshot toolbar (`Cmd+Shift+5`). |
 | **Windows Delete key** | Forward-deletes in text (native); in **Finder**, `Delete` = move to Trash, `Shift+Delete` = delete immediately. On the built-in keyboard, `Right-Option+Backspace` = forward delete. |
 | **Windows nav keys** | `Home`/`End`, `Ctrl+←/→` (word jump), `Ctrl+Backspace/Delete` (word delete), `Alt+F4` (quit), etc. — from windows-mode. |
-| **VS Code / Cursor** | IDEs are exempt from the OS matrix, so Windows-style **Ctrl shortcuts are added to your editor's `keybindings.json`** instead — additive (Cmd still works, your own bindings win, the integrated terminal stays raw). |
+| **VS Code / Cursor** | Editor gets Windows-style **Ctrl shortcuts via `keybindings.json`** (additive; Cmd still works; your bindings win). The **Claude Code panel** additionally gets `Ctrl+C/X/Z/A` (copy/cut/undo/select-all) and `Home`/`End` at the Karabiner level, because its webview input can't be reached by `keybindings.json`. The **integrated terminal** is best-effort (selection-aware `Ctrl+C` copy, else SIGINT). |
+| **Alt+Tab** | Per-**window** switching via the [AltTab](https://alt-tab-macos.netlify.app/) app (installed by the installer). When AltTab is installed and running, `Alt+Tab` (`Option+Tab`) is left **raw** for it; otherwise the config falls back to `Option+Tab → Cmd+Tab` (the macOS per-app switcher). |
+| **Remote desktop (Thincast, Citrix, MS RDP)** | Exempt from the matrix — keys pass through **raw** so the remote Linux/Windows session handles them natively. `Globe→Control` still applies, so Globe stays your Ctrl *into* the session. |
 
 ### Why a "matrix" and not just a key swap?
 
@@ -65,8 +67,12 @@ is unavoidable, not incidental.
 ```
 
 The installer is idempotent and:
-1. Ensures Karabiner-Elements + `jsonnet` are installed (via Homebrew).
-2. Renders `jsonnet/macboard.jsonnet` → `json/macboard.json` and lints it.
+1. Ensures Karabiner-Elements, `jsonnet`, and **AltTab** are installed (via Homebrew), and
+   launches AltTab so it can claim `Alt+Tab`.
+2. Renders `jsonnet/macboard.jsonnet` → `json/macboard.json` and lints it. **If AltTab is
+   installed and running**, `Alt+Tab` (`Option+Tab`) is left raw so AltTab's per-window
+   switcher gets it; otherwise the `Option+Tab → Cmd+Tab` (macOS app-switcher) fallback is
+   compiled in (`--tla-code has_alttab=…`).
 3. **Backs up** `~/.config/karabiner/karabiner.json` (timestamped).
 4. Applies the `fn→left_control` simple-mod and the full ruleset. By default it
    **merges** into your active profile; `--clean` instead replaces your whole config
@@ -78,6 +84,8 @@ The installer is idempotent and:
 7. Adds Windows-style **Ctrl keybindings to VS Code / Cursor** (`keybindings.json`) —
    additive: your Cmd shortcuts and your own bindings are kept, the integrated terminal
    stays raw. Skipped if neither is installed.
+8. Adds `source …/shell/macboard.zsh` to your **`~/.zshrc`** so terminal word/line motion
+   (`Ctrl+←/→`, `Home`/`End`) loads in every new shell. Skipped if already present.
 
 It's **idempotent**: every step changes only what's actually out of date, and a file is
 backed up only when it's modified — so repeat runs are no-ops, not a pile of backups.
@@ -88,7 +96,8 @@ Grant Karabiner **Input Monitoring** / **Accessibility** permission if prompted.
 > F-key (`fnState`) and the Spaces-shortcut changes at login — until you do, the top row
 > and `Ctrl+←/→` won't behave yet.
 
-For terminal word-jump, source the shell bindings from your `~/.zshrc`:
+The installer adds the shell-bindings `source` line to your `~/.zshrc` automatically (step 8
+above). To wire it up by hand — or in a different shell rc — add:
 
 ```sh
 source /path/to/macboard/shell/macboard.zsh
@@ -100,15 +109,17 @@ source /path/to/macboard/shell/macboard.zsh
 ./uninstall.sh
 ```
 
-Restores the most recent pre-install backup and reverts the F-key setting.
-(Karabiner-Elements itself is left installed.)
+Restores the most recent pre-install backup, reverts the F-key (`fnState`) and
+**"Move left/right a space"** settings, and removes the `source …/macboard.zsh` line from
+your `~/.zshrc`. (Karabiner-Elements and AltTab themselves are left installed.)
 
 ## Customize
 
 Rules live in [`jsonnet/macboard.jsonnet`](jsonnet/macboard.jsonnet) (our amendments —
-media layer, PrintScreen, Finder delete) layered on the vendored
-[`jsonnet/windows_shortcuts.jsonnet`](jsonnet/windows_shortcuts.jsonnet) (the matrix).
-Edit, then re-run `./install.sh`.
+media layer, PrintScreen, Finder delete, the AltTab fallback) layered on the vendored
+[`jsonnet/windows_shortcuts.jsonnet`](jsonnet/windows_shortcuts.jsonnet) (the matrix). It
+takes one top-level arg, `has_alttab` (default `false`), which the installer sets from
+AltTab detection. Edit, then re-run `./install.sh`.
 
 ## Caveats
 
@@ -120,13 +131,20 @@ Edit, then re-run `./install.sh`.
 - macboard **disables the macOS "Move left/right a space" shortcut** so `Ctrl+←/→` is
   free for word-jump (you lose Ctrl+arrow Space-switching — use a swipe / Mission Control,
   or remap it). **Requires a logout/restart** to take effect.
-- **Terminal** word-jump (`Ctrl+←/→`, `Ctrl+Backspace/Delete`) relies on your shell
-  binding the Ctrl+arrow escape sequences — source [`shell/macboard.zsh`](shell/macboard.zsh).
+- **Terminal** word/line motion (`Ctrl+←/→`, `Ctrl+Backspace/Delete`, `Home`/`End`) comes
+  from the shell bindings in [`shell/macboard.zsh`](shell/macboard.zsh), which the installer
+  sources from `~/.zshrc`. New shells pick it up automatically; `source ~/.zshrc` in any
+  already-open ones.
 - **VS Code / Cursor need a restart** after install: macboard sets
   `keyboard.dispatch: keyCode` so the editor honors the Globe→Control remap (without it,
   *none* of the editor Ctrl bindings fire), and that setting only applies on restart.
-- The built-in keyboard loses `fn+Delete` forward-delete (the fn layer is now Control);
-  use `Right-Option+Backspace`, or the dedicated Delete key on an external keyboard.
+- **AltTab grabs `Option+Tab` globally**, so inside a remote-desktop client (Thincast/RDP)
+  it fires the *Mac's* window switcher rather than sending `Alt+Tab` to the remote. Add the
+  client under AltTab → **Exceptions** if you want `Alt+Tab` to reach the session.
+- On the **built-in keyboard** the `fn`/Globe layer is gone (it's now Control), so the keys
+  it used to produce are unavailable: `fn+Delete` forward-delete → use `Right-Option+Backspace`;
+  and there are no `Home`/`End`/`PgUp`/`PgDn` keys → use `Cmd+←/→` for line start/end and the
+  trackpad to scroll. (On an external PC keyboard those keys exist and work.)
 
 ## License
 
