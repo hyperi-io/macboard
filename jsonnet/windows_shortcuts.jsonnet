@@ -373,9 +373,11 @@ local if_vscode_family = k.condition('if', bundle.vscodeFamily);
            k.outputKey('r', ['command']),
            k.condition('if', ['^com\\.google\\.Chrome$', '^com\\.google\\.chrome$'])),
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    k.rule('Tab (Alt) [+IDEs, Remote Desktops, and Terminal Emulators]',
-           k.input('tab', ['option']),
-           k.outputKey('tab', ['command']),
-           k.condition('unless', bundle.hypervisors + bundle.remoteDesktops, file_paths.remoteDesktops)),
+    // Alt+Tab (Option+Tab) is intentionally LEFT RAW -- no rule. It passes straight through to the
+    // AltTab app (installed by install.sh) on its default Option+Tab trigger, giving Windows-style
+    // per-WINDOW switching. The previous Option+Tab -> Cmd+Tab remap fired macOS's native per-APP
+    // switcher instead, so AltTab never saw the key. AltTab also needs continuously-held modifiers,
+    // which a discrete Karabiner chord can't provide -- another reason not to remap it.
+    // (For RDP: add the client to AltTab's Exceptions so Alt+Tab reaches the remote session.)
   ],
 }

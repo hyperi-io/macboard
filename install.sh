@@ -41,11 +41,21 @@ if ! brew list --cask alt-tab >/dev/null 2>&1 && [ ! -d "/Applications/AltTab.ap
   say "Installing AltTab…"
   brew install --cask alt-tab
 fi
+# Launch AltTab in the background so it is running and claims Option+Tab; idempotent
+# (no-op if already running). Brief poll so the render step below detects it.
+if [ -d "/Applications/AltTab.app" ]; then
+  open -ga AltTab 2>/dev/null || true
+  for _ in 1 2 3 4 5 6; do pgrep -x AltTab >/dev/null 2>&1 && break; sleep 0.5; done
+fi
 
-# 2. Render jsonnet -> json and lint it.
-say "Rendering config…"
+# 2. Render jsonnet -> json and lint it. If AltTab is installed AND running, leave Alt+Tab
+#    (Option+Tab) RAW so AltTab's per-window switcher handles it (has_alttab=true). Otherwise
+#    keep windows-mode's Option+Tab -> Cmd+Tab remap (the macOS per-app switcher default).
+HAS_ALTTAB=false
+pgrep -x AltTab >/dev/null 2>&1 && HAS_ALTTAB=true
+say "Rendering config (AltTab active: ${HAS_ALTTAB})…"
 mkdir -p "${REPO_DIR}/json"
-jsonnet "${REPO_DIR}/jsonnet/macboard.jsonnet" > "${RENDERED}"
+jsonnet --tla-code "has_alttab=${HAS_ALTTAB}" "${REPO_DIR}/jsonnet/macboard.jsonnet" > "${RENDERED}"
 
 if command -v karabiner_cli >/dev/null 2>&1; then
   say "Linting with karabiner_cli…"

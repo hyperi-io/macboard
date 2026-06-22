@@ -4071,7 +4071,7 @@
          ]
       },
       {
-         "description": "Tab (Alt) [+IDEs, Remote Desktops, and Terminal Emulators]",
+         "description": "Tab (Alt) -> Cmd+Tab [fallback: AltTab not installed/running]",
          "manipulators": [
             {
                "conditions": [

@@ -18,6 +18,8 @@
 
 local k = import 'lib/karabiner.libsonnet';
 local ws = import 'windows_shortcuts.jsonnet';
+local bundle = import 'lib/bundle.libsonnet';
+local file_paths = import 'lib/file_paths.libsonnet';
 
 //-------------------------------------------------------------------//
 // RIGHT-OPTION MEDIA LAYER                                           //
@@ -96,10 +98,28 @@ local finderDelete = [
          k.condition('if', finder)),
 ];
 
+//-------------------------------------------------------------------//
+// ALT+TAB FALLBACK (conditional)                                    //
+// has_alttab (top-level arg, default false):                        //
+//   true  -> the AltTab app is installed+running and owns Alt+Tab,  //
+//            so we leave Option+Tab RAW for its per-WINDOW switcher. //
+//   false -> no AltTab; restore windows-mode's Option+Tab -> Cmd+Tab //
+//            remap (the macOS per-APP switcher default).             //
+// The installer detects AltTab and passes this via --tla-code; a    //
+// bare `jsonnet` render defaults to the no-AltTab (fallback) config. //
+//-------------------------------------------------------------------//
+
 //------//
 // MAIN //
 //------//
-{
-  title: 'macboard (Windows/Linux muscle memory)',
-  rules: mediaLayer + auxKeys + finderDelete + ws.rules,
-}
+function(has_alttab=false)
+  local altTabFallback = if has_alttab then [] else [
+    k.rule('Tab (Alt) -> Cmd+Tab [fallback: AltTab not installed/running]',
+           k.input('tab', ['option']),
+           k.outputKey('tab', ['command']),
+           k.condition('unless', bundle.hypervisors + bundle.remoteDesktops, file_paths.remoteDesktops)),
+  ];
+  {
+    title: 'macboard (Windows/Linux muscle memory)',
+    rules: mediaLayer + auxKeys + finderDelete + ws.rules + altTabFallback,
+  }
