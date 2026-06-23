@@ -113,7 +113,18 @@ local finderDelete = [
 // MAIN //
 //------//
 function(has_alttab=false)
-  local altTabFallback = if has_alttab then [] else [
+  local altTabRules = if has_alttab then [
+    // AltTab present: Option+Tab is left RAW (no rule) for its per-window switcher, which
+    // already works on the external QWERTY (Alt = Option). On the BUILT-IN keyboard the
+    // spacebar-adjacent key is Command, not Option, so redirect ONLY that keyboard's
+    // Cmd+Tab -> Option+Tab to feed the same AltTab trigger. device_if is_built_in_keyboard
+    // means the external QWERTY never sees this rule -- its Alt+Tab and Cmd+Tab are untouched.
+    k.rule('Tab (Cmd) -> Option+Tab [built-in keyboard only; feeds AltTab]',
+           k.input('tab', ['command']),
+           k.outputKey('tab', ['option']),
+           { type: 'device_if', identifiers: [{ is_built_in_keyboard: true }] }),
+  ] else [
+    // No AltTab: restore windows-mode's Option+Tab -> Cmd+Tab (the macOS app-switcher).
     k.rule('Tab (Alt) -> Cmd+Tab [fallback: AltTab not installed/running]',
            k.input('tab', ['option']),
            k.outputKey('tab', ['command']),
@@ -121,5 +132,5 @@ function(has_alttab=false)
   ];
   {
     title: 'macboard (Windows/Linux muscle memory)',
-    rules: mediaLayer + auxKeys + finderDelete + ws.rules + altTabFallback,
+    rules: mediaLayer + auxKeys + finderDelete + ws.rules + altTabRules,
   }
