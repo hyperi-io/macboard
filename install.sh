@@ -133,8 +133,8 @@ $(say "macboard installed.")
   • VS Code + Claude Code panel: Ctrl+C/V/X/Z/A and word/line motion work Windows-style.
   • Top row = F1–F12;  Right-Option + F1…F12 = brightness / Mission Control / volume / media.
   • PrintScreen = Cmd+Shift+5;  Finder Delete = move to Trash.
-  • AltTab installed — Windows-style per-window switching (grant it Accessibility +
-    Screen Recording permission on first launch).
+  • AltTab installed — Windows-style per-window switching on Alt+Tab (built-in keyboard:
+    Cmd+Tab too). Grant it Accessibility + Screen Recording permission on first launch.
   • Ctrl+←/→ freed from Spaces-switching → word-jump in terminals (via your shell bindings).
   • VS Code / Cursor: Windows-style Ctrl shortcuts added — RESTART the editor to apply
     (macboard also sets keyboard.dispatch=keyCode so it honors Globe→Control).

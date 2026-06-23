@@ -23,10 +23,12 @@ keyboard and get back to work.
 **Especially when docked.** The scenario: a MacBook on a docking station driving
 an external monitor with a full-size **Windows/PC keyboard** plugged in. That external
 keyboard sends a *real* Ctrl — which macOS normally ignores for copy/paste — so macboard's
-`Ctrl→Cmd` translation is exactly what makes `Ctrl+C` actually copy on it. The rules apply
-to **both** the external PC keyboard and the MacBook's built-in keyboard identically, and
-they follow you across undock / redock and hot-plugging. Swap your hands between the two
-keyboards mid-task and nothing changes under your fingers.
+`Ctrl→Cmd` translation is exactly what makes `Ctrl+C` actually copy on it. The `Ctrl→Cmd`
+matrix applies to **both** the external PC keyboard and the MacBook's built-in keyboard
+identically, and follows you across undock / redock and hot-plugging. Swap your hands
+between the two keyboards mid-task and nothing changes under your fingers. (The one
+keyboard-specific tweak is `Alt+Tab` — see the table — because the built-in board's
+spacebar-adjacent key is Command, not Option.)
 
 Built on [Karabiner-Elements](https://karabiner-elements.pqrs.org/) and a fork of
 [rux616/karabiner-windows-mode](https://github.com/rux616/karabiner-windows-mode).
