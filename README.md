@@ -152,7 +152,7 @@ Edit, then re-run `./install.sh`.
 
 ## License
 
-[MIT](LICENSE) © Hyperi. The vendored files under `jsonnet/` (from
+[Apache-2.0](LICENSE) © HyperI (see [NOTICE](NOTICE)). The vendored files under `jsonnet/` (from
 [rux616/karabiner-windows-mode](https://github.com/rux616/karabiner-windows-mode)) are
 public-domain (Unlicense) and retain that dedication.
 
