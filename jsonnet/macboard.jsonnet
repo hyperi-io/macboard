@@ -67,13 +67,47 @@ local mediaLayer = [
 ];
 
 //-------------------------------------------------------------------//
+// SCREENSHOT KEYS                                                    //
+// "PrintScreen" means EVERY way of asking for a screenshot: the      //
+// external QWERTY's PrintScreen key and the Mac's own Cmd+Shift+3/4/ //
+// 5. They all land on the same tool, so the answer does not depend   //
+// on which keyboard is in hand or which habit fires first.           //
+//-------------------------------------------------------------------//
+local screenshotRules(shottr_capture) =
+  // A macOS Cmd+Shift+<digit> key that Shottr already owns is left alone -- remapping it
+  // to itself would be a cycle.
+  local ownedByShottr(digit, target) =
+    target != null &&
+    target.key_code == digit &&
+    std.set(target.modifiers) == std.set(['command', 'shift']);
+  local toShottr(digit, what, target) =
+    if target == null || ownedByShottr(digit, target) then [] else [
+      k.rule('[macboard] Cmd+Shift+' + digit + ' -> Shottr ' + what + ' (' + target.label + ')',
+             k.input(digit, ['command', 'shift']),
+             k.outputKey(target.key_code, target.modifiers)),
+    ];
+  if shottr_capture != null then
+    [
+      k.rule('[macboard] PrintScreen -> Shottr area capture (' + shottr_capture.area.label + ')',
+             k.input('print_screen'),
+             k.outputKey(shottr_capture.area.key_code, shottr_capture.area.modifiers)),
+    ]
+    // Each native macOS screenshot key keeps its meaning, served by Shottr instead:
+    // Cmd+Shift+3 grabs the screen, Cmd+Shift+4 and the Cmd+Shift+5 toolbar grab an area.
+    + toShottr('3', 'full screen', shottr_capture.fullscreen)
+    + toShottr('4', 'area capture', shottr_capture.area)
+    + toShottr('5', 'area capture', shottr_capture.area)
+  else
+    [
+      k.rule('[macboard] PrintScreen -> Screenshot toolbar (Cmd+Shift+5)',
+             k.input('print_screen'),
+             k.outputKey('5', ['command', 'shift'])),
+    ];
+
+//-------------------------------------------------------------------//
 // AUXILIARY / QUERY KEYS                                             //
 //-------------------------------------------------------------------//
 local auxKeys = [
-  // External Windows keyboard PrintScreen -> macOS screenshot toolbar.
-  k.rule('[macboard] PrintScreen -> Screenshot toolbar (Cmd+Shift+5)',
-         k.input('print_screen'),
-         k.outputKey('5', ['command', 'shift'])),
   // The built-in keyboard has no forward-delete key (fn+Delete is gone now that
   // Globe = Control). Give it back on Right-Option+Backspace. Does not collide with
   // the media layer (that is Right-Option + F-row only).
@@ -109,10 +143,24 @@ local finderDelete = [
 // bare `jsonnet` render defaults to the no-AltTab (fallback) config. //
 //-------------------------------------------------------------------//
 
+//-------------------------------------------------------------------//
+// SCREENSHOT TARGET (conditional)                                   //
+// shottr_capture (top-level arg, default null):                     //
+//   null   -> no Shottr; PrintScreen opens the macOS screenshot     //
+//             toolbar and Cmd+Shift+3/4/5 stay native.              //
+//   object -> {area, fullscreen, ...}, each {key_code, modifiers,   //
+//             label}, read from Shottr's own prefs by the installer //
+//             (scripts/shottr_hotkey.py) so a custom binding is     //
+//             honoured rather than assumed. PrintScreen and the     //
+//             Cmd+Shift+3/4/5 trio all fire Shottr. A null          //
+//             fullscreen leaves Cmd+Shift+3 native.                 //
+// macboard never installs Shottr -- it is the user's own app.       //
+//-------------------------------------------------------------------//
+
 //------//
 // MAIN //
 //------//
-function(has_alttab=false)
+function(has_alttab=false, shottr_capture=null)
   local altTabRules = if has_alttab then [
     // AltTab present: Option+Tab is left RAW (no rule) for its per-window switcher, which
     // already works on the external QWERTY (Alt = Option). On the BUILT-IN keyboard the
@@ -132,5 +180,6 @@ function(has_alttab=false)
   ];
   {
     title: 'macboard (Windows/Linux muscle memory)',
-    rules: mediaLayer + auxKeys + finderDelete + ws.rules + altTabRules,
+    rules: mediaLayer + screenshotRules(shottr_capture) + auxKeys + finderDelete
+           + ws.rules + altTabRules,
   }

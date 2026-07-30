@@ -6,6 +6,10 @@
 # macOS
 .DS_Store
 
+# Python bytecode from scripts/
+__pycache__/
+*.pyc
+
 # Claude Code / AI assistant artifacts
 .claude/
 CLAUDE.md

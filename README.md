@@ -44,7 +44,7 @@ Apple Silicon MacBook (tested on an M-series Air), recent macOS. **macOS only.**
 | **Command keys** | Unchanged and additive: `Cmd+C` still copies, so copy works from *both* the Globe/Control key and Command. |
 | **Top function row** | Real **F1–F12** by default (on both keyboards). The rare Mac system ops move to a **Right-Option layer**. |
 | **Right-Option + F1…F12** | Brightness ↓↑, Mission Control, Spotlight, keyboard backlight ↓↑, ⏮ ⏯ ⏭, mute, volume ↓↑. |
-| **PrintScreen** | Opens the macOS screenshot toolbar (`Cmd+Shift+5`). |
+| **Screenshots** | "PrintScreen" means **every** way of asking: the external QWERTY's `PrintScreen` key **and** the Mac's `Cmd+Shift+3/4/5`. If [Shottr](https://shottr.cc/) is installed it serves all of them — `Cmd+Shift+3` grabs the screen, `PrintScreen`/`Cmd+Shift+4`/`Cmd+Shift+5` grab an area — and it's launched if it was quit. The installer reads Shottr's *own* hotkeys (defaults `Cmd+Shift+2` area, `Cmd+Shift+1` full screen), so a custom binding is honoured. No Shottr, and `PrintScreen` opens the macOS screenshot toolbar while `Cmd+Shift+3/4/5` stay native. macboard never installs Shottr: install or remove it yourself, then re-run `./install.sh`. |
 | **Windows Delete key** | Forward-deletes in text (native); in **Finder**, `Delete` = move to Trash, `Shift+Delete` = delete immediately. On the built-in keyboard, `Right-Option+Backspace` = forward delete. |
 | **Windows nav keys** | `Home`/`End`, `Ctrl+←/→` (word jump), `Ctrl+Backspace/Delete` (word delete), `Alt+F4` (quit), etc. — from windows-mode. |
 | **VS Code / Cursor** | Editor gets Windows-style **Ctrl shortcuts via `keybindings.json`** (additive; Cmd still works; your bindings win). The **Claude Code panel** additionally gets `Ctrl+C/X/Z/A` (copy/cut/undo/select-all) and `Home`/`End` at the Karabiner level, because its webview input can't be reached by `keybindings.json`. The **integrated terminal** is best-effort (selection-aware `Ctrl+C` copy, else SIGINT). |
@@ -118,10 +118,12 @@ your `~/.zshrc`. (Karabiner-Elements and AltTab themselves are left installed.)
 ## Customize
 
 Rules live in [`jsonnet/macboard.jsonnet`](jsonnet/macboard.jsonnet) (our amendments —
-media layer, PrintScreen, Finder delete, the AltTab fallback) layered on the vendored
+media layer, screenshot keys, Finder delete, the AltTab fallback) layered on the vendored
 [`jsonnet/windows_shortcuts.jsonnet`](jsonnet/windows_shortcuts.jsonnet) (the matrix). It
-takes one top-level arg, `has_alttab` (default `false`), which the installer sets from
-AltTab detection. Edit, then re-run `./install.sh`.
+takes two top-level args, both set by the installer from what it detects: `has_alttab`
+(default `false`) and `shottr_capture` (default `null`, else the hotkey object that
+[`scripts/shottr_hotkey.py`](scripts/shottr_hotkey.py) reads out of Shottr's prefs).
+Edit, then re-run `./install.sh`.
 
 ## Caveats
 

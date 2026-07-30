@@ -48,14 +48,31 @@ if [ -d "/Applications/AltTab.app" ]; then
   for _ in 1 2 3 4 5 6; do pgrep -x AltTab >/dev/null 2>&1 && break; sleep 0.5; done
 fi
 
+# Shottr is the user's own screenshot app — macboard never installs it. When it is present,
+# PrintScreen and Cmd+Shift+3/4/5 all fire Shottr's own hotkeys (read from Shottr's prefs, so
+# a custom binding is honoured); otherwise those keys keep their native macOS meaning.
+# --launch starts Shottr if it is installed but quit, since a hotkey only fires while its
+# owner runs.
+say "Checking Shottr…"
+SHOTTR_CAPTURE="$(python3 "${REPO_DIR}/scripts/shottr_hotkey.py" --launch 2>/dev/null || true)"
+if [ -n "${SHOTTR_CAPTURE}" ]; then
+  SCREENSHOT_TARGET="Shottr ($(printf '%s' "${SHOTTR_CAPTURE}" |
+    python3 -c 'import json,sys; print(json.load(sys.stdin)["summary"])'))"
+else
+  SHOTTR_CAPTURE=null
+  SCREENSHOT_TARGET="macOS screenshot keys (PrintScreen = Cmd+Shift+5 toolbar)"
+fi
+
 # 2. Render jsonnet -> json and lint it. If AltTab is installed AND running, leave Alt+Tab
 #    (Option+Tab) RAW so AltTab's per-window switcher handles it (has_alttab=true). Otherwise
 #    keep windows-mode's Option+Tab -> Cmd+Tab remap (the macOS per-app switcher default).
 HAS_ALTTAB=false
 pgrep -x AltTab >/dev/null 2>&1 && HAS_ALTTAB=true
-say "Rendering config (AltTab active: ${HAS_ALTTAB})…"
+say "Rendering config (AltTab active: ${HAS_ALTTAB}; screenshots: ${SCREENSHOT_TARGET})…"
 mkdir -p "${REPO_DIR}/json"
-jsonnet --tla-code "has_alttab=${HAS_ALTTAB}" "${REPO_DIR}/jsonnet/macboard.jsonnet" > "${RENDERED}"
+jsonnet --tla-code "has_alttab=${HAS_ALTTAB}" \
+        --tla-code "shottr_capture=${SHOTTR_CAPTURE}" \
+        "${REPO_DIR}/jsonnet/macboard.jsonnet" > "${RENDERED}"
 
 if command -v karabiner_cli >/dev/null 2>&1; then
   say "Linting with karabiner_cli…"
@@ -132,7 +149,8 @@ $(say "macboard installed.")
   • System terminals stay raw Control (Ctrl+C = interrupt; copy/paste = Ctrl+Shift+C/V).
   • VS Code + Claude Code panel: Ctrl+C/V/X/Z/A and word/line motion work Windows-style.
   • Top row = F1–F12;  Right-Option + F1…F12 = brightness / Mission Control / volume / media.
-  • PrintScreen = Cmd+Shift+5;  Finder Delete = move to Trash.
+  • Screenshots (PrintScreen and Cmd+Shift+3/4/5) -> ${SCREENSHOT_TARGET}.
+  • Finder Delete = move to Trash;  Shift+Delete = delete immediately.
   • AltTab installed — Windows-style per-window switching on Alt+Tab (built-in keyboard:
     Cmd+Tab too). Grant it Accessibility + Screen Recording permission on first launch.
   • Ctrl+←/→ freed from Spaces-switching → word-jump in terminals (via your shell bindings).
