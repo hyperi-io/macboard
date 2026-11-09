@@ -13,8 +13,8 @@
 #     integrated terminal); system terminals stay raw and use the Ctrl variants above.
 #     Binding both keeps word-jump working whichever form zsh receives.
 #
-# Enable by sourcing from your ~/.zshrc:
-#     source /path/to/macboard/shell/macboard.zsh
+# install.sh copies this file to ~/.config/macboard/macboard.zsh and sources that copy from
+# ~/.zshrc. After editing it here, refresh the copy: python3 scripts/zshrc.py install .
 
 # --- Ctrl variants (raw Ctrl+arrow reaching zsh) ---
 bindkey '^[[1;5C' forward-word          # Ctrl+Right     -> forward one word

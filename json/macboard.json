@@ -295,6 +295,23 @@
          "description": "[macboard] PrintScreen -> Screenshot toolbar (Cmd+Shift+5)",
          "manipulators": [
             {
+               "conditions": [
+                  {
+                     "bundle_identifiers": [
+                        "^org\\.virtualbox\\.app\\.VirtualBoxVM$",
+                        "^com\\.parallels\\.desktop\\.console$",
+                        "^org\\.vmware\\.fusion$",
+                        "^com\\.citrix\\.XenAppViewer$",
+                        "^com\\.microsoft\\.rdc\\.macos$",
+                        "^com\\.thincast\\.rdc\\.app$",
+                        "^com\\.thincast\\.client\\.rdwebaccessclient$"
+                     ],
+                     "file_paths": [
+                        "Chrome Remote Desktop\\.app"
+                     ],
+                     "type": "frontmost_application_unless"
+                  }
+               ],
                "from": {
                   "key_code": "print_screen",
                   "modifiers": {

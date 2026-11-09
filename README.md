@@ -49,7 +49,7 @@ Apple Silicon MacBook (tested on an M-series Air), recent macOS. **macOS only.**
 | **Windows nav keys** | `Home`/`End`, `Ctrl+←/→` (word jump), `Ctrl+Backspace/Delete` (word delete), `Alt+F4` (quit), etc. — from windows-mode. |
 | **VS Code / Cursor** | Editor gets Windows-style **Ctrl shortcuts via `keybindings.json`** (additive; Cmd still works; your bindings win). The **Claude Code panel** additionally gets `Ctrl+C/X/Z/A` (copy/cut/undo/select-all) and `Home`/`End` at the Karabiner level, because its webview input can't be reached by `keybindings.json`. The **integrated terminal** is best-effort (selection-aware `Ctrl+C` copy, else SIGINT). |
 | **Alt+Tab** | Per-**window** switching via the [AltTab](https://alt-tab-macos.netlify.app/) app (installed by the installer). When AltTab is installed and running, `Alt+Tab` (`Option+Tab`) is left **raw** for it; otherwise the config falls back to `Option+Tab → Cmd+Tab` (the macOS per-app switcher). On the **built-in keyboard** (whose spacebar-adjacent key is Command, not Option) `Cmd+Tab` is redirected to `Option+Tab` so it reaches AltTab too — scoped to the built-in keyboard, so the external QWERTY is untouched. |
-| **Remote desktop (Thincast, Citrix, MS RDP)** | Exempt from the matrix — keys pass through **raw** so the remote Linux/Windows session handles them natively. `Globe→Control` still applies, so Globe stays your Ctrl *into* the session. |
+| **Remote desktop (Thincast, Citrix, MS RDP)** | Exempt from the matrix -- keys pass through **raw** so the remote Linux/Windows session handles them natively. That includes the screenshot keys: the external QWERTY's `PrintScreen` arrives in the session as a real PrtSc instead of firing a Mac screenshot. `Globe->Control` still applies, so Globe stays your Ctrl *into* the session. |
 
 ### Why a "matrix" and not just a key swap?
 
@@ -86,8 +86,10 @@ The installer is idempotent and:
 7. Adds Windows-style **Ctrl keybindings to VS Code / Cursor** (`keybindings.json`) —
    additive: your Cmd shortcuts and your own bindings are kept, the integrated terminal
    stays raw. Skipped if neither is installed.
-8. Adds `source …/shell/macboard.zsh` to your **`~/.zshrc`** so terminal word/line motion
-   (`Ctrl+←/→`, `Home`/`End`) loads in every new shell. Skipped if already present.
+8. Copies [`shell/macboard.zsh`](shell/macboard.zsh) to `~/.config/macboard/` and sources
+   that copy from your **`~/.zshrc`**, so terminal word/line motion (`Ctrl+Left/Right`,
+   `Home`/`End`) loads in every new shell and survives the clone being moved or deleted.
+   An older line that sourced the clone directly is replaced.
 
 It's **idempotent**: every step changes only what's actually out of date, and a file is
 backed up only when it's modified — so repeat runs are no-ops, not a pile of backups.
@@ -102,8 +104,11 @@ The installer adds the shell-bindings `source` line to your `~/.zshrc` automatic
 above). To wire it up by hand — or in a different shell rc — add:
 
 ```sh
-source /path/to/macboard/shell/macboard.zsh
+[ -f "$HOME/.config/macboard/macboard.zsh" ] && source "$HOME/.config/macboard/macboard.zsh"
 ```
+
+After editing `shell/macboard.zsh` in the repo, refresh the copy with
+`python3 scripts/zshrc.py install .` (no Karabiner re-merge or logout needed).
 
 ## Uninstall
 
@@ -112,8 +117,9 @@ source /path/to/macboard/shell/macboard.zsh
 ```
 
 Restores the most recent pre-install backup, reverts the F-key (`fnState`) and
-**"Move left/right a space"** settings, and removes the `source …/macboard.zsh` line from
-your `~/.zshrc`. (Karabiner-Elements and AltTab themselves are left installed.)
+**"Move left/right a space"** settings, removes the `macboard.zsh` source line from your
+`~/.zshrc` and deletes `~/.config/macboard/macboard.zsh`. (Karabiner-Elements and AltTab
+themselves are left installed.)
 
 ## Customize
 
@@ -137,7 +143,7 @@ Edit, then re-run `./install.sh`.
   or remap it). **Requires a logout/restart** to take effect.
 - **Terminal** word/line motion (`Ctrl+←/→`, `Ctrl+Backspace/Delete`, `Home`/`End`) comes
   from the shell bindings in [`shell/macboard.zsh`](shell/macboard.zsh), which the installer
-  sources from `~/.zshrc`. New shells pick it up automatically; `source ~/.zshrc` in any
+  copies to `~/.config/macboard/` and sources from `~/.zshrc`. New shells pick it up automatically; `source ~/.zshrc` in any
   already-open ones.
 - **VS Code / Cursor need a restart** after install: macboard sets
   `keyboard.dispatch: keyCode` so the editor honors the Globe→Control remap (without it,

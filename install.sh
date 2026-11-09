@@ -126,21 +126,11 @@ PY
 say "Adding Ctrl keybindings to VS Code / Cursor (if installed)…"
 python3 "${REPO_DIR}/scripts/vscode_keybindings.py" || true
 
-# 8. Source the shell word/line-motion bindings from ~/.zshrc so they load in every new
-#    shell (terminal Ctrl+arrow word-jump and Home/End). Idempotent: skipped if already
-#    sourced; ~/.zshrc is backed up (timestamped) only when this actually appends.
+# 8. Copy the shell word/line-motion bindings (terminal Ctrl+arrow word-jump, Home/End) to
+#    ~/.config/macboard and source that copy from ~/.zshrc, so new shells never depend on
+#    where the clone lives. Replaces a legacy line that sourced the clone directly.
 say "Ensuring ~/.zshrc sources macboard.zsh…"
-ZSHRC="${HOME}/.zshrc"
-if [ -f "${ZSHRC}" ] && grep -qF "shell/macboard.zsh" "${ZSHRC}"; then
-  say "~/.zshrc already sources macboard.zsh; leaving as is."
-else
-  [ -f "${ZSHRC}" ] && cp "${ZSHRC}" "${ZSHRC}.macboard-backup-$(date +%Y%m%d-%H%M%S)"
-  {
-    printf '\n# macboard: PC-style word/line navigation at the zsh prompt\n'
-    printf 'source "%s/shell/macboard.zsh"\n' "${REPO_DIR}"
-  } >> "${ZSHRC}"
-  say "Added source line to ~/.zshrc (open a new terminal to apply)."
-fi
+python3 "${REPO_DIR}/scripts/zshrc.py" install "${REPO_DIR}"
 
 cat <<EOF
 

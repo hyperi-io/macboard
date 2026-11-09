@@ -73,6 +73,11 @@ local mediaLayer = [
 // 5. They all land on the same tool, so the answer does not depend   //
 // on which keyboard is in hand or which habit fires first.           //
 //-------------------------------------------------------------------//
+// Remote desktops and hypervisors get every screenshot key raw. FreeRDP-based clients
+// (Thincast) map PrintScreen to VK_SNAPSHOT, so the remote session sees a real PrtSc.
+local unless_remoteDesktop_hypervisor =
+  k.condition('unless', bundle.hypervisors + bundle.remoteDesktops, file_paths.remoteDesktops);
+
 local screenshotRules(shottr_capture) =
   // A macOS Cmd+Shift+<digit> key that Shottr already owns is left alone -- remapping it
   // to itself would be a cycle.
@@ -84,13 +89,15 @@ local screenshotRules(shottr_capture) =
     if target == null || ownedByShottr(digit, target) then [] else [
       k.rule('[macboard] Cmd+Shift+' + digit + ' -> Shottr ' + what + ' (' + target.label + ')',
              k.input(digit, ['command', 'shift']),
-             k.outputKey(target.key_code, target.modifiers)),
+             k.outputKey(target.key_code, target.modifiers),
+             unless_remoteDesktop_hypervisor),
     ];
   if shottr_capture != null then
     [
       k.rule('[macboard] PrintScreen -> Shottr area capture (' + shottr_capture.area.label + ')',
              k.input('print_screen'),
-             k.outputKey(shottr_capture.area.key_code, shottr_capture.area.modifiers)),
+             k.outputKey(shottr_capture.area.key_code, shottr_capture.area.modifiers),
+             unless_remoteDesktop_hypervisor),
     ]
     // Each native macOS screenshot key keeps its meaning, served by Shottr instead:
     // Cmd+Shift+3 grabs the screen, Cmd+Shift+4 and the Cmd+Shift+5 toolbar grab an area.
@@ -101,7 +108,8 @@ local screenshotRules(shottr_capture) =
     [
       k.rule('[macboard] PrintScreen -> Screenshot toolbar (Cmd+Shift+5)',
              k.input('print_screen'),
-             k.outputKey('5', ['command', 'shift'])),
+             k.outputKey('5', ['command', 'shift']),
+             unless_remoteDesktop_hypervisor),
     ];
 
 //-------------------------------------------------------------------//
@@ -176,7 +184,7 @@ function(has_alttab=false, shottr_capture=null)
     k.rule('Tab (Alt) -> Cmd+Tab [fallback: AltTab not installed/running]',
            k.input('tab', ['option']),
            k.outputKey('tab', ['command']),
-           k.condition('unless', bundle.hypervisors + bundle.remoteDesktops, file_paths.remoteDesktops)),
+           unless_remoteDesktop_hypervisor),
   ];
   {
     title: 'macboard (Windows/Linux muscle memory)',
