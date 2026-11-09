@@ -78,6 +78,16 @@ local mediaLayer = [
 local unless_remoteDesktop_hypervisor =
   k.condition('unless', bundle.hypervisors + bundle.remoteDesktops, file_paths.remoteDesktops);
 
+// The built-in keyboard has no PrtSc, so the Mac screenshot keys send F13 into remote desktops,
+// the same key an external PrtSc arrives as.
+local remoteScreenshotRules = [
+  k.rule('[macboard] Cmd+Shift+' + digit + ' -> F13 (PrtSc) [remote desktops]',
+         k.input(digit, ['command', 'shift']),
+         k.outputKey('f13'),
+         k.condition('if', bundle.remoteDesktops, file_paths.remoteDesktops))
+  for digit in ['3', '4', '5']
+];
+
 local screenshotRules(shottr_capture) =
   // A macOS Cmd+Shift+<digit> key that Shottr already owns is left alone -- remapping it
   // to itself would be a cycle.
@@ -188,6 +198,6 @@ function(has_alttab=false, shottr_capture=null)
   ];
   {
     title: 'macboard (Windows/Linux muscle memory)',
-    rules: mediaLayer + screenshotRules(shottr_capture) + auxKeys + finderDelete
+    rules: mediaLayer + remoteScreenshotRules + screenshotRules(shottr_capture) + auxKeys + finderDelete
            + ws.rules + altTabRules,
   }
