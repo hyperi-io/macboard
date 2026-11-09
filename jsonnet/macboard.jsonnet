@@ -73,8 +73,8 @@ local mediaLayer = [
 // 5. They all land on the same tool, so the answer does not depend   //
 // on which keyboard is in hand or which habit fires first.           //
 //-------------------------------------------------------------------//
-// Remote desktops and hypervisors get every screenshot key raw. FreeRDP-based clients
-// (Thincast) map PrintScreen to VK_SNAPSHOT, so the remote session sees a real PrtSc.
+// Remote desktops and hypervisors get every screenshot key raw. macOS has no PrtSc key code,
+// so the session receives F13 and the remote end has to map it.
 local unless_remoteDesktop_hypervisor =
   k.condition('unless', bundle.hypervisors + bundle.remoteDesktops, file_paths.remoteDesktops);
 
