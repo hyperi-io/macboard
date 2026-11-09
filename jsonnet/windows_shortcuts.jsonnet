@@ -61,6 +61,16 @@ local if_vscode_family = k.condition('if', bundle.vscodeFamily);
 {
   title: 'Windows Shortcuts',
   rules: [
+    // Inputs match extra modifiers, so these must precede `V (Ctrl)`, which would otherwise
+    // turn Ctrl+Shift+V into Cmd+Shift+V (Markdown preview, not paste) in IDEs.
+    k.rule('C (Ctrl+Shift) [Terminal Emulators + IDEs]',
+           k.input('c', ['control', 'shift']),
+           k.outputKey('c', ['command']),
+           if_terminal_or_ide),
+    k.rule('V (Ctrl+Shift) [Terminal Emulators + IDEs]',
+           k.input('v', ['control', 'shift']),
+           k.outputKey('v', ['command']),
+           if_terminal_or_ide),
     k.rule('Insert (Ctrl)',
            k.input('insert', ['control']),
            k.outputKey('c', ['command']),
@@ -287,15 +297,6 @@ local if_vscode_family = k.condition('if', bundle.vscodeFamily);
            k.outputKey('q', ['command']),
            unless_hypervisor_ide_remoteDesktop),
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    k.rule('C (Ctrl+Shift) [Terminal Emulators + IDEs]',
-           k.input('c', ['control', 'shift']),
-           k.outputKey('c', ['command']),
-           if_terminal_or_ide),
-    k.rule('V (Ctrl+Shift) [Terminal Emulators + IDEs]',
-           k.input('v', ['control', 'shift']),
-           k.outputKey('v', ['command']),
-           if_terminal_or_ide),
-    ////////////////////////////////////////////////////////////////////////////////////////////////
     // Windows edit cluster for the Claude Code panel (VS Code family only). Ctrl+V paste is
     // already covered by ide_terminal_safe; these add copy/cut/undo/redo/select-all.
     k.rule('C (Ctrl) [Only VS Code family -> copy in the Claude Code panel]',
@@ -306,13 +307,13 @@ local if_vscode_family = k.condition('if', bundle.vscodeFamily);
            k.input('x', ['control']),
            k.outputKey('x', ['command']),
            if_vscode_family),
-    k.rule('Z (Ctrl) [Only VS Code family]',
-           k.input('z', ['control']),
-           k.outputKey('z', ['command']),
-           if_vscode_family),
     k.rule('Z (Ctrl+Shift) [Only VS Code family -> redo]',
            k.input('z', ['control', 'shift']),
            k.outputKey('z', ['command', 'shift']),
+           if_vscode_family),
+    k.rule('Z (Ctrl) [Only VS Code family]',
+           k.input('z', ['control']),
+           k.outputKey('z', ['command']),
            if_vscode_family),
     k.rule('A (Ctrl) [Only VS Code family -> select all]',
            k.input('a', ['control']),
